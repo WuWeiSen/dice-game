@@ -1,0 +1,84 @@
+<template name="first">
+    <view class="dice-box first">
+        <span class="dice-point"></span>
+    </view>
+</template>
+<template name="second">
+    <view class="dice-box second">
+        <span class="dice-point"></span>
+        <span class="dice-point self-flex-end"></span>
+    </view>
+</template>
+<template name="third">
+    <view class="dice-box third">
+        <span class="dice-point"></span>
+        <span class="dice-point self-flex-center"></span>
+        <span class="dice-point self-flex-end"></span>
+    </view>
+</template>
+<template name="fourth">
+    <view class="dice-box fourth">
+        <view class="column">
+            <span class="dice-point"></span>
+            <span class="dice-point"></span>
+        </view>
+        <view class="column">
+            <span class="dice-point"></span>
+            <span class="dice-point"></span>
+        </view>
+    </view>
+</template>
+<template name="fifth">
+    <view class="dice-box fifth">
+        <view class="column">
+            <span class="dice-point"></span>
+            <span class="dice-point"></span>
+        </view>
+        <view class="column justify-center">
+            <span class="dice-point"></span>
+        </view>
+        <view class="column">
+            <span class="dice-point"></span>
+            <span class="dice-point"></span>
+        </view>
+    </view>
+</template>
+<template name="sixth">
+    <view class="dice-box sixth">
+        <view class="column">
+            <span class="dice-point"></span>
+            <span class="dice-point"></span>
+            <span class="dice-point"></span>
+        </view>
+        <view class="column">
+            <span class="dice-point"></span>
+            <span class="dice-point"></span>
+            <span class="dice-point"></span>
+        </view>
+    </view>
+</template>
+<view>
+    <view class="game-info">
+        <div class="name">{{ userInfo.name }}</div>
+        <div class="score">{{ userInfo.score }}</div>
+    </view>
+    <view class="dice-body">
+        <block wx:for="{{showDiceTemplateArray}}">
+            <template is="{{item}}" />
+        </block>
+    </view>
+    <view class="game-operate">
+        <button data-type="big" bindtap="changeDice">
+            <span>大</span>
+            <span>1:1</span>
+        </button>
+        <button data-type="leopard" bindtap="changeDice">
+            <span>豹子</span>
+            <span>1:24</span>
+        </button>
+        <button data-type="small" bindtap="changeDice">
+            <span>小</span>
+            <span>1:1</span>
+        </button>
+    </view>
+</view>

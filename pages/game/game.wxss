@@ -1,0 +1,104 @@
+.game-info {
+    margin: 20rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-info .score {
+    border: 1px solid #eee;
+    border-radius: 20%;
+    padding: 5rpx 10rpx;
+}
+
+.dice-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 40rpx;
+}
+
+.dice-box {
+    margin: 32rpx;
+    padding: 8rpx;
+    background-color: #e7e7e7;
+    width: 210rpx;
+    height: 210rpx;
+    box-shadow: inset 0 5px white, inset 0 -5px #bbb, inset 5px 0 #d7d7d7, inset -5px 0 #d7d7d7;
+    border-radius: 10%;
+}
+
+.dice-point {
+    display: block;
+    width: 48rpx;
+    height: 48rpx;
+    border-radius: 50%;
+    margin: 8rpx;
+    background-color: #333;
+    box-shadow: inset 0 6rpx #111, inset 0 -6rpx #555;
+}
+
+.self-flex-center {
+    align-self: center;
+}
+
+.self-flex-end {
+    align-self: flex-end;
+}
+
+.justify-center {
+    justify-content: center !important;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.first {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.second {
+    display: flex;
+    justify-content: space-between;
+}
+
+.third {
+    display: flex;
+}
+
+.fourth,
+.sixth,
+.fifth {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.game-operate {
+    display: flex;
+    margin-top: 60rpx;
+}
+
+.game-operate button {
+    width: 200rpx;
+    height: 200rpx;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    line-height: 60rpx;
+}
+
+@media all and (min-height: 480px) {
+    .dice-body {
+        margin-top: 60rpx;
+    }
+    .game-operate {
+        margin-top: 200rpx;
+    }
+}
