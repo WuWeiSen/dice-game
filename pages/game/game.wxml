@@ -60,7 +60,12 @@
 <view>
     <view class="game-info">
         <div class="name">{{ userInfo.name }}</div>
-        <div class="score">{{ userInfo.score }}</div>
+        <div>
+            <span class="money {{moneyClass}}">{{ sigleScore }}</span>
+            <div class="score">
+                {{ userInfo.score }}
+            </div>
+        </div>
     </view>
     <view class="dice-body">
         <block wx:for="{{showDiceTemplateArray}}">

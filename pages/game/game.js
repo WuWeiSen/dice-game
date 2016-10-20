@@ -1,21 +1,38 @@
 Page({
     data: {
         userInfo: {},
+        sigleScore: 0, // 本次得分
         showDiceTemplateArray: [], // 用于存储显示哪些骰子模版
         showDiceArray: [0, 1, 2], // 用于存储随机数
-        gaming: false //判断是否在游戏中
+        gaming: false, //判断是否在游戏中
+        moneyClass: '' // 用于添加类
     },
     getUserInfo: function() {
         return wx.getStorageSync('userInfo');
     },
     setUserScore: function(score) {
-        this.setData({
-            userInfo: {
-                name: this.data.userInfo.name,
-                score: this.data.userInfo.score + score
-            }
+        var that = this;
+        // 本次得分赋值, 附加动画
+        that.setData({
+            moneyClass: 'change',
+            sigleScore: score > 0 ? '+' + score : score
         });
-        wx.setStorageSync('userInfo', this.data.userInfo)
+        // 改变总分，延迟一点体验比较好
+        setTimeout(function() {
+            that.setData({
+                userInfo: {
+                    name: that.data.userInfo.name,
+                    score: that.data.userInfo.score + score
+                }
+            });
+            wx.setStorageSync('userInfo', that.data.userInfo);
+        }, 660);
+        // 清除本次得分动画
+        setTimeout(function() {
+            that.setData({
+                moneyClass: ''
+            });
+        }, 1500);
     },
     // 判断显示隐藏
     isHidden: function() {
@@ -35,6 +52,7 @@ Page({
     // 游戏开始,骰子变化
     changeDice: function(event) {
         var that = this;
+        // 判断是否在游戏
         if (that.data.gaming) {
             return;
         }
@@ -83,7 +101,6 @@ Page({
             sum += that.data.showDiceArray[i];
         }
         if (rule[userGuess](sum)) {
-            console.log(userGuess);
             that.setUserScore(100);
         } else {
             that.setUserScore(-100);

@@ -1,14 +1,78 @@
 .game-info {
-    margin: 20rpx;
+    margin: 0 20rpx;
+    height: 100rpx;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+    position: relative;
 }
 
 .game-info .score {
     border: 1px solid #eee;
     border-radius: 20%;
     padding: 5rpx 10rpx;
+}
+
+.game-info .money {
+    color: red;
+    position: absolute;
+    right: 4px;
+    opacity: 0;
+    bottom: 0rpx;
+}
+
+.game-info .money.change {
+    animation: changeMoney ease-in-out 1.5s;
+}
+
+
+/*金钱的动画效果*/
+
+@keyframes changeMoney {
+    0% {
+        bottom: 0rpx;
+        opacity: 0;
+    }
+    10% {
+        bottom: 10rpx;
+        opacity: 0.2;
+    }
+    20% {
+        bottom: 20rpx;
+        opacity: 0.4;
+    }
+    30% {
+        bottom: 30rpx;
+        opacity: 0.6;
+    }
+    40% {
+        bottom: 40rpx;
+        opacity: 0.8;
+    }
+    50% {
+        bottom: 50rpx;
+        opacity: 1;
+    }
+    60% {
+        bottom: 54rpx;
+        opacity: 1;
+    }
+    75% {
+        bottom: 56rpx;
+        opacity: 0.6;
+    }
+    85% {
+        bottom: 58rpx;
+        opacity: 0.4;
+    }
+    95% {
+        bottom: 60rpx;
+        opacity: 0.2;
+    }
+    100% {
+        bottom: 60rpx;
+        opacity: 0;
+    }
 }
 
 .dice-body {
