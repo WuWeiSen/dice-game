@@ -1,14 +1,23 @@
 Page({
     data: {
         userInfo: {},
+        bet: 0, // 下注的筹码
+        betByCalculate: 0, // 用于计算
         sigleScore: 0, // 本次得分
         showDiceTemplateArray: [], // 用于存储显示哪些骰子模版
         showDiceArray: [0, 1, 2], // 用于存储随机数
         gaming: false, //判断是否在游戏中
-        moneyClass: '' // 用于添加类
+        moneyClass: '', // 用于添加金额的动画类
+        chipsClass: '' // 用于添加闪烁动画类
     },
     getUserInfo: function() {
         return wx.getStorageSync('userInfo');
+    },
+    putChip: function(event) {
+        var chipsSum = Number(this.data.bet) + Number(event.currentTarget.dataset.amount);
+        this.setData({
+            bet: chipsSum
+        });
     },
     setUserScore: function(score) {
         var that = this;
@@ -60,6 +69,25 @@ Page({
         that.setData({
             gaming: true
         });
+        // 设置用于该次游戏的赌注
+        that.setData({
+            betByCalculate: that.data.bet
+        });
+        // 判断赌注是否大于0 
+        if (that.data.betByCalculate <= 0) {
+            // 附加闪烁动画
+            that.setData({
+                chipsClass: "blink-smooth"
+            });
+            // 清除闪烁动画
+            setTimeout(function() {
+                that.setData({
+                    chipsClass: '',
+                    gaming: false
+                });
+            }, 2500);
+            return
+        }
         var t1 = setInterval(function() {
             that.data.showDiceArray = [that.getRandomInt(0, 5), that.getRandomInt(0, 5), that.getRandomInt(0, 5)];
             that.isHidden();
@@ -85,26 +113,30 @@ Page({
         }
         var that = this;
         var sum = 3;
+        var betByCalculate = that.data.betByCalculate;
         // 豹子
         if (that.data.showDiceArray[0] == that.data.showDiceArray[1] && that.data.showDiceArray[1] == that.data.showDiceArray[2]) {
             if (userGuess == 'leopard') {
-                that.setUserScore(24 * 100);
+                that.setUserScore(24 * betByCalculate);
                 return;
             }
         }
         // 选了豹子没中
         if (userGuess == 'leopard') {
-            that.setUserScore(-100);
+            that.setUserScore(-betByCalculate);
             return;
         }
         for (let i = 0; i < that.data.showDiceArray.length; i++) {
             sum += that.data.showDiceArray[i];
         }
         if (rule[userGuess](sum)) {
-            that.setUserScore(100);
+            that.setUserScore(betByCalculate);
         } else {
-            that.setUserScore(-100);
+            that.setUserScore(-betByCalculate);
         }
+    },
+    removeBet: function(event) {
+        console.log(event.touches[0].clientX + ":" + event.touches[0].clientY);
     },
     onLoad: function() {
         var that = this;

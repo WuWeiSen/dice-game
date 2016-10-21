@@ -1,4 +1,5 @@
 /**app.wxss**/
+
 .mt300 {
     margin-top: 300rpx;
 }
@@ -9,6 +10,14 @@
 
 .mt200 {
     margin-top: 200rpx;
+}
+
+.mr10 {
+    margin-right: 10rpx;
+}
+
+.mb10 {
+    margin-bottom: 10rpx;
 }
 
 .w600 {
@@ -22,9 +31,18 @@
 .h60 {
     height: 60rpx;
 }
+
+.w120 {
+    width: 120rpx;
+}
+
+.h120 {
+    height: 120rpx;
+}
 .text-center {
     text-align: center;
 }
+
 .orange-btn {
     background-color: #fba927;
     color: white;
