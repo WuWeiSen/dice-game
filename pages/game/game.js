@@ -8,7 +8,13 @@ Page({
         showDiceArray: [0, 1, 2], // 用于存储随机数
         gaming: false, //判断是否在游戏中
         moneyClass: '', // 用于添加金额的动画类
-        chipsClass: '' // 用于添加闪烁动画类
+        chipsClass: '', // 用于添加闪烁动画类
+        finger: { // 用于移动定位
+            Y: 0,
+            X: 0
+        },
+        showBet: false, // 是否显示黑盘中的筹码
+        timeArray: []
     },
     getUserInfo: function() {
         return wx.getStorageSync('userInfo');
@@ -135,13 +141,55 @@ Page({
             that.setUserScore(-betByCalculate);
         }
     },
+    // 移动盘中筹码
     removeBet: function(event) {
-        console.log(event.touches[0].clientX + ":" + event.touches[0].clientY);
+        var that = this;
+        if (that.data.bet <= 0) {
+            return;
+        }
+        // 隐藏盘中筹码
+        if (!that.data.showBet) {
+            that.setData({
+                showBet: true
+            });
+        }
+        // 只需保存开始、结束时间
+        if (that.data.timeArray.length > 1) {
+            that.data.timeArray[1] = event.timeStamp;
+        } else {
+            // 将时间戳push到时间数组
+            that.data.timeArray.push(event.timeStamp);
+        }
+        that.setData({
+            finger: {
+                Y: event.touches[0].clientY,
+                X: event.touches[0].clientX
+            }
+        });
+    },
+    // 移动盘中筹码完毕
+    removeBetEnd: function() {
+        var that = this;
+        if (that.data.timeArray.length > 1) {
+            var startTime = that.data.timeArray[0];
+            var endTime = that.data.timeArray[1];
+            if (endTime - startTime > 10) {
+                that.setData({
+                    showBet: false,
+                    bet: 0
+                });
+            }
+            // 清空时间数组
+            that.setData({
+                timeArray: []
+            })
+        }
+
     },
     onLoad: function() {
         var that = this;
         that.setData({
-            userInfo: this.getUserInfo()
+            userInfo: that.getUserInfo()
         });
         that.isHidden();
     }

@@ -165,7 +165,8 @@
     height: 232rpx;
 }
 
-.chip-body .put-chips .put-chips-amount, .moving-chips-amount{
+.chip-body .put-chips .put-chips-amount,
+.moving-chips-amount {
     position: absolute;
     color: #e0d23e;
     font-size: 32rpx;
@@ -184,6 +185,7 @@
         color: transparent
     }
 }
+
 .game-operate {
     display: flex;
     margin-top: 40rpx;

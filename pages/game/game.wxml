@@ -83,10 +83,10 @@
                 <image mode='aspectFit' data-amount="500" bindtap="putChip" class="w120 h120" src="/images/chip-500.png"></image>
             </view>
         </view>
-        <view class="put-chips" bindtouchmove="removeBet">
+        <view class="put-chips" bindtouchmove="removeBet" bindtouchend="removeBetEnd">
             <image mode='aspectFit' class="put-chips-img" src="/images/put-chips.png">
             </image>
-            <span class="put-chips-amount {{chipsClass}}">{{ bet > 0? bet:'下注金额' }}</span>
+            <view hidden="{{ showBet }}" class="put-chips-amount {{chipsClass}}">{{ bet > 0? bet:'下注金额' }}</view>
         </view>
     </view>
     <view class="game-operate">
@@ -104,4 +104,4 @@
         </button>
     </view>
 </view>
-<!-- <view class="moving-chips-amount">{{bet}}</view> -->
+<view hidden="{{ !showBet }}" class="moving-chips-amount"  style="top: {{finger.Y}}px; left: {{finger.X}}px;">{{bet}}</view>
