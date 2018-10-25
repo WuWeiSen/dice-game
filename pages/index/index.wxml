@@ -2,14 +2,15 @@
 <view class="container">
   <view class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <text class="userinfo-nickname">{{motto}}</text>
+    <button wx:if="{{canIUse && !userInfo}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
   </view>
   <view class="mt300">
     <button type="primary" bindtap="goGame" class="w600">
-        开始游戏 
+      开始游戏
     </button>
     <button bindtap="goToRank" class="mt60 w600 orange-btn" hover-class="orange-hover">
-        排行榜
+      排行榜
     </button>
   </view>
 </view>

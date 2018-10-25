@@ -68,7 +68,7 @@
         </div>
     </view>
     <view class="dice-body">
-        <block wx:for="{{showDiceTemplateArray}}">
+        <block wx:for="{{showDiceTemplateArray}}" wx:key="*this">
             <template is="{{item}}" />
         </block>
     </view>

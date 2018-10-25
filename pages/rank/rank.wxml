@@ -1,11 +1,14 @@
 <!--logs.wxml-->
 <view class="container log-list">
-    <block wx:for="{{rankLogs}}" wx:for-item="log">
-        <view class="log-item">
-            <image class="w60 h60" wx:if="{{index + 1 == 1}}" mode='scaleToFill' src="/images/rank-first.png"></image>
-            <view wx:if="{{index + 1 != 1}}" class="w60 text-center">{{index + 1}}</view>
-            <span>{{log.name}}</span>
-            <span>{{log.score}}</span>
-        </view>
-    </block>
+  <block wx:if="rankLogs.length > 0" wx:for="{{rankLogs}}" wx:for-item="log" wx:key="*this">
+    <view class="log-item">
+      <image class="w60 h60" wx:if="{{index + 1 == 1}}" mode='scaleToFill' src="/images/rank-first.png"></image>
+      <view wx:if="{{index + 1 != 1}}" class="w60 text-center">{{index + 1}}</view>
+      <span>{{log.name}}</span>
+      <span>{{log.score}}</span>
+    </view>
+  </block>
+</view>
+<view wx:if="{{canIUse && rankLogs.length === 0}}" class="container">
+  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
 </view>

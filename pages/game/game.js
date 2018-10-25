@@ -17,7 +17,7 @@ Page({
         timeArray: []
     },
     getUserInfo: function() {
-        return wx.getStorageSync('userInfo');
+      return wx.getStorageSync('rankUserInfo');
     },
     putChip: function(event) {
         var chipsSum = Number(this.data.bet) + Number(event.currentTarget.dataset.amount);
@@ -40,7 +40,7 @@ Page({
                     score: that.data.userInfo.score + score
                 }
             });
-            wx.setStorageSync('userInfo', that.data.userInfo);
+          wx.setStorageSync('rankUserInfo', that.data.userInfo);
         }, 660);
         // 清除本次得分动画
         setTimeout(function() {
